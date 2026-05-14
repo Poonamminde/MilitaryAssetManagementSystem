@@ -7,7 +7,9 @@ export class ApiError extends Error {
     this.statusCode = statusCode;
     this.isOperational = isOperational;
     Object.setPrototypeOf(this, ApiError.prototype);
-    Error.captureStackTrace(this, this.constructor);
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, this.constructor);
+    }
   }
 }
 
